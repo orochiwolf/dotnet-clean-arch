@@ -7,10 +7,15 @@ This repository contains a .NET API built with Clean Architecture, Entity Framew
 
 .
 ├── Dockerfile
+
 ├── Program.cs
+
 ├── AppDbContext.cs
+
 ├── Controllers/
+
 ├── Services/
+
 └── Models/
 
 🎯 Features
