@@ -6,6 +6,7 @@ This repository contains a .NET API built with Clean Architecture, Entity Framew
 🏗️ Project Structure
 
 .
+
 ├── Dockerfile
 
 ├── Program.cs
@@ -32,6 +33,7 @@ This repository contains a .NET API built with Clean Architecture, Entity Framew
 1️⃣ Clone the repository
 
 git clone https://github.com/username/dotnet-clean-api.git
+
 cd dotnet-clean-api
 
 2️⃣ Build Docker Image
@@ -54,13 +56,17 @@ FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /app
 
 COPY . ./
+
 RUN dotnet publish -c Release -o out
 
 FROM mcr.microsoft.com/dotnet/aspnet:8.0
+
 WORKDIR /app
+
 COPY --from=build /app/out .
 
 EXPOSE 5000
+
 ENTRYPOINT ["dotnet", "DotnetCleanAPI.dll"]
 
 📚 Tech Stack
