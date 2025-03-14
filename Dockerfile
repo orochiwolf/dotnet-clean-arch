@@ -1,28 +1,29 @@
-# Build Stage
+# Use the official .NET SDK as the build environment
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
+
 WORKDIR /app
 
-# Copy the project files
-COPY . ./
+# Copy everything and restore
+COPY . . 
 
-# Restore dependencies
+# Restore NuGet packages
 RUN dotnet restore
 
-# Build the project
-RUN dotnet build -c Release --no-restore
+# Set environment to Development
+ENV ASPNETCORE_ENVIRONMENT=Development
 
-# Publish the app
-RUN dotnet publish -c Release -o out --no-restore
 
-# Runtime Stage
-FROM mcr.microsoft.com/dotnet/aspnet:8.0
+# Build and publish
+RUN dotnet publish -c Release -o out
+
+# Use the ASP.NET runtime image
+FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS runtime
+
 WORKDIR /app
-
-# Copy the published files from the build stage
 COPY --from=build /app/out .
 
 # Expose port
-EXPOSE 5000
+EXPOSE 8080
 
-# Entry point
+# Run the API
 ENTRYPOINT ["dotnet", "DotnetCleanAPI.dll"]

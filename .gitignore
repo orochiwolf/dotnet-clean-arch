@@ -1,0 +1,26 @@
+# Ignore .NET build output
+bin/
+obj/
+out/
+*.suo
+*.user
+*.db
+*.log
+
+# Docker
+docker-compose.override.yml
+.dockerignore
+**/Dockerfile*
+
+# ASP.NET Secret Files
+secrets.json
+appsettings.json
+appsettings.Development.json
+
+# IDE Specific
+.vscode/
+.idea/
+
+app.http
+
+Properties/*
